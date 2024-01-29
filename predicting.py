@@ -38,7 +38,7 @@ def check_text(text, dictionary_words):
     return 'meaningful' if len(meaningful_words) >= len(tokens) * 0.1 else 'not meaningful'
 
 # Load Persian dictionary
-persian_words = load_dictionary('persian_words.txt')
+persian_words = load_dictionary('english-text.txt')
 
 # Read file
 file_path = "farsi-text.txt"  # Replace with your file path
