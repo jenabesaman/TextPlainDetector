@@ -1,12 +1,9 @@
 import os
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify
 import TextPlainDetector
-# import Language
-import sys
 
 app = Flask(__name__)
 app.debug = True
-
 
 
 @app.errorhandler(404)
@@ -28,65 +25,21 @@ def invalid_route(e):
 def ping():
     return "This is a api test only"
 
-
 @app.route("/textplain", methods=["post"])
 def predicting():
     try:
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
         data = request.get_json(force=True)
-        base64_string = data["base64_string"]
-        obj = TextPlainDetector.TextPlainDetector(base64_string)
-        result = obj.predicting()
-        print(result)
-        return jsonify({'result': result})
-    except:
+        if "string" in data and data["string"]:
+            string = data["string"]
+            obj = TextPlainDetector.TextPlainDetector(string)
+            result = obj.predicting()
+            return jsonify({'result': result})
+        else:
+            return "No string provided in the request data"
+    except Exception as e:
+        print(e)  # This will print the exception message, which can help with debugging
         return "cant predict"
 
-
-# @app.route("/objects", methods=["post"])
-# def classification():
-#     try:
-#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-#         data = request.get_json(force=True)
-#         base64_string = data["base64_string"]
-#         ImObject = Classification_main.Image_Classification(base64_Image=base64_string)
-#         return jsonify({'result': ImObject})
-#     except:
-#         return "cant predict"
-
-
-# @app.route("/translate", methods=["post"])
-# def translating():
-#     try:
-#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-#         data = request.get_json(force=True)
-#         src = str(request.args.get('src'))
-#         dest = str(request.args.get('dest'))
-#         my_dict = {}
-#         for key, value in data.items():
-#             translated = Language.translation(input_text=value, src=src, dest=dest)
-#             my_dict[key] = translated.text
-#         return my_dict
-#     except:
-#         return "cant translate"
-
-# @app.route("/summarize", methods=["post"])
-# def summarizing():
-#     try:
-#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-#         data = request.get_json(force=True)
-#         # print(data)
-#         text = data["text"]
-#         # text2='"'+'"'+'"'+text+'"'+'"'+'"'
-#         # print(text)
-#         ConvertSTRToTXT.converting(text)
-#         summarize = main.summarize(filename="Summarize/text.txt")
-#         # result = obj.handeling()
-#         # return jsonify({'result': summarize})
-#         return jsonify({'result': summarize})
-#     except:
-#         return "cant summarize"
-
-
 if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=44344, use_reloader=False)
+    app.run(debug=True, host='0.0.0.0', port=8544, use_reloader=False)

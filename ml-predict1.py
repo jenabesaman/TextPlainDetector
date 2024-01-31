@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 vectorizer, model = joblib.load('model_and_vectorizer.pkl')
 
 # Assume we have a list of file paths
-file_paths = ["usf.exe"]  # list of file paths
+file_paths = ["farsi-text.txt"]  # list of file paths
 
 def read_file_as_text(file_path, encodings):
     for encoding in encodings:
@@ -28,6 +28,7 @@ def read_file_as_text(file_path, encodings):
 
 # Read the texts from the files
 texts = [read_file_as_text(file_path, ['utf-8', 'windows-1256', 'latin-1']) for file_path in file_paths]
+print(texts)
 
 # Tokenize the text and convert to lower case
 tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+')
