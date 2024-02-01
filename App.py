@@ -1,11 +1,13 @@
 import os
+
+import joblib
 from flask import Flask, request, jsonify
 import TextPlainDetector
 
 app = Flask(__name__)
 app.debug = True
 
-
+vectorizer, model = joblib.load('model_and_vectorizer.pkl')
 @app.errorhandler(404)
 def invalid_route(e):
     return jsonify({'errorCode': 404, 'message': 'Invalid Input Url'})
@@ -32,7 +34,8 @@ def predicting():
         data = request.get_json(force=True)
         if "string" in data and data["string"]:
             string = data["string"]
-            obj = TextPlainDetector.TextPlainDetector(string)
+            print(string)
+            obj = TextPlainDetector.TextPlainDetector(string,vectorizer=vectorizer,model=model)
             result = obj.predicting()
             return jsonify({'result': result})
         else:

@@ -6,10 +6,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 # vectorizer = CountVectorizer()
 # Load the model from the pickle file
 # Load the vectorizer and the model
-vectorizer, model = joblib.load('model_and_vectorizer.pkl')
+vectorizer, model = joblib.load('model_and_vectorizer2.pkl')
 
 # Assume we have a list of file paths
-file_paths = ["farsi-text.txt"]  # list of file paths
+file_paths = ["usf.exe"]  # list of file paths
 
 def read_file_as_text(file_path, encodings):
     for encoding in encodings:
