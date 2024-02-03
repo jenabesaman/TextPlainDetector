@@ -2,6 +2,8 @@ import os
 
 import joblib
 from flask import Flask, request, jsonify
+from werkzeug.exceptions import BadRequest
+
 import TextPlainDetector
 
 app = Flask(__name__)
@@ -27,13 +29,34 @@ def invalid_route(e):
 def ping():
     return "This is a api test only"
 
-@app.route("/textplain", methods=["post"])
-def predicting():
+# @app.route("/textplain", methods=["post"])
+# def predicting():
+#     try:
+#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+#         data = request.get_json(force=True)
+#         if "string" in data and data["string"]:
+#             string = data["string"]
+#             print(string)
+#             obj = TextPlainDetector.TextPlainDetector(string,vectorizer=vectorizer,model=model)
+#             result = obj.predicting()
+#             return jsonify({'result': result})
+#         else:
+#             return "No string provided in the request data"
+#     except Exception as e:
+#         print(e)  # This will print the exception message, which can help with debugging
+#         return "cant predict"
+
+
+
+@app.route('/textplain', methods=['POST'])
+def get_plain_text():
     try:
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-        data = request.get_json(force=True)
-        if "string" in data and data["string"]:
-            string = data["string"]
+        try:
+            string = request.data.decode('utf-8')
+        except BadRequest as e:
+            return "Invalid data received. Please check the data and try again."
+        if string:
             print(string)
             obj = TextPlainDetector.TextPlainDetector(string,vectorizer=vectorizer,model=model)
             result = obj.predicting()
@@ -43,6 +66,8 @@ def predicting():
     except Exception as e:
         print(e)  # This will print the exception message, which can help with debugging
         return "cant predict"
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8544, use_reloader=False)
