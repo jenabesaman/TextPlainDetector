@@ -5,13 +5,12 @@ from flask import Flask, request, jsonify
 from werkzeug.exceptions import BadRequest
 
 import TextPlainDetector
-# import TextPlainDetector_new
+import TextPlainDetector_ML
+
 app = Flask(__name__)
 app.debug = True
 
-# vectorizer, model = joblib.load('model_and_vectorizer.pkl')
-
-
+vectorizer, model = joblib.load('model_and_vectorizer.pkl')
 @app.errorhandler(404)
 def invalid_route(e):
     return jsonify({'errorCode': 404, 'message': 'Invalid Input Url'})
@@ -31,7 +30,6 @@ def invalid_route(e):
 def ping():
     return "This is a api test only"
 
-
 # @app.route("/textplain", methods=["post"])
 # def predicting():
 #     try:
@@ -50,25 +48,6 @@ def ping():
 #         return "cant predict"
 
 
-# @app.route('/textplain', methods=['POST'])
-# def get_plain_text():
-#     try:
-#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-#         try:
-#             string = request.data.decode('utf-8')
-#         except BadRequest as e:
-#             return "Invalid data received. Please check the data and try again."
-#         if string:
-#             print(string)
-#             obj = TextPlainDetector.TextPlainDetector(string, vectorizer=vectorizer, model=model)
-#             result = obj.predicting()
-#             return jsonify({'result': result})
-#         else:
-#             return "No string provided in the request data"
-#     except Exception as e:
-#         print(e)  # This will print the exception message, which can help with debugging
-#         return "cant predict"
-
 
 @app.route('/textplain', methods=['POST'])
 def get_plain_text():
@@ -79,14 +58,37 @@ def get_plain_text():
         except BadRequest as e:
             return "Invalid data received. Please check the data and try again."
         if string:
-            # print(string)
-            obj = TextPlainDetector.TextPlainDetector(text=string)
-            return jsonify({'result': obj})
+            print(string)
+            obj = TextPlainDetector_ML.TextPlainDetector(string,vectorizer=vectorizer,model=model)
+            result = obj.predicting()
+            return jsonify({'result': result})
         else:
             return "No string provided in the request data"
     except Exception as e:
         print(e)  # This will print the exception message, which can help with debugging
         return "cant predict"
+
+
+# @app.route('/textplain', methods=['POST'])
+# def get_plain_text():
+#     try:
+#         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+#         try:
+#             string = request.data.decode('utf-8')
+#             print(string)
+#         except BadRequest as e:
+#             return "Invalid data received. Please check the data and try again."
+#         if string:
+#             print(string)
+#             obj = TextPlainDetector.TextPlainDetector(text=string)
+#             return jsonify({'result': obj})
+#         else:
+#             return "No string provided in the request data"
+#     except Exception as e:
+#         print(e)  # This will print the exception message, which can help with debugging
+#         return "cant predict"
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=8544, use_reloader=False)

@@ -1,24 +1,32 @@
-import nltk
-import joblib
-import numpy as np
+def TextPlainDetector(text):
+    count = 0
+    for char in text:
 
-class TextPlainDetector:
-    def __init__(self, InString: str,vectorizer,model):
-        self.text = [InString]
-        self.vectorizer = vectorizer
-        self.model = model
+        if not (32 <= ord(char) <= 126) and ord(char) not in [10,13,1570, 1576, 1662,40,41,8226,
+                1578, 1579, 1580, 1670, 1581, 1582, 1583, 1584, 1585, 1586, 1688, 1587, 1588, 1589, 1590, 1591, 1592,
+                1593, 1594, 1601, 1602, 1705, 1711, 1604, 1605, 1606, 1608, 1607, 1740, 1575, 8204, 1548, 1571, 1611,
+                1612, 1613, 1614, 1615, 1616, 1617, 1618, 1619, 1600, 65010, 46, 126, 33, 64, 35, 36, 37, 94, 38, 42]:
+            count += 1
+            # print(ord(char))
+            # print(f"char: {char} num: {ord(char)}")
+    if count >= 3:
+        return False
+    else:
+        return True
 
-    def predicting(self):
-        # vectorizer, model = joblib.load('model_and_vectorizer2.pkl')
-        tokenizer = nltk.tokenize.RegexpTokenizer(r'\w+')
-        texts = [tokenizer.tokenize(text.lower())[:20] for text in self.text]
-        texts = [word for text in texts for word in text]
-        features = self.vectorizer.transform(texts)
-        predictions = self.model.predict(features)
-        percentage_similar = np.mean(predictions) * 100
-        # similar_words = [word for word, pred in zip(texts, predictions) if pred]
-        if percentage_similar >= 80:
-            return True
-        else:
-            return False
-# textPlainDetector=TextPlainDetector("")
+#
+# print(TextPlainDetector(text="""
+# 40017051017
+# نام کاربری/Username
+# •••••••••
+# گذرواژه/Password
+#
+#
+#
+# بازیابی گذرواژه و نام کاربری
+#
+# ورود/ثبت نام از پنجره واحد دولت هوشمند"""))
+
+#[1570,1576,1662,1578,1579,1580,
+        # 1670,1581,1582,1583,1584,1585,1586,1688,1587,1588,1589,1590,1591,1592,1593,1594,1601,1602,1705,1711,1604,1605,1606,
+        # 1608,1607,1740,1575,8204,1548,1571]

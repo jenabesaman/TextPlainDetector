@@ -1,0 +1,11 @@
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\bin\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.deps.json
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\bin\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.dll
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\bin\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.pdb
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.GeneratedMSBuildEditorConfig.editorconfig
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.AssemblyInfoInputs.cache
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.AssemblyInfo.cs
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.csproj.CoreCompileInputs.cache
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.dll
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\refint\DSTV3.Management.TextPlainDetector.Api.dll
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\DSTV3.Management.TextPlainDetector.Api.pdb
+D:\dstv3.backend\DSTV3.Management.TextPlainDetector.Api\obj\Debug\net6.0\ref\DSTV3.Management.TextPlainDetector.Api.dll

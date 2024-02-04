@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "DSTV3.Management.TextPlainDetector.Api/1.0.0": {
+        "runtime": {
+          "DSTV3.Management.TextPlainDetector.Api.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DSTV3.Management.TextPlainDetector.Api/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

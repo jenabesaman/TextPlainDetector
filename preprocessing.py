@@ -27,6 +27,8 @@ df.columns = ['Byte', 'Frequency']
 
 # add a column for the character representation of each byte
 df['Character'] = df['Byte'].apply(lambda x: chr(x) if 32 <= x <= 126 else '')
+# def check_char(string):
+
 
 # save the DataFrame to an Excel file
-df.to_excel('byte_frequencies.xlsx', index=False)
+# df.to_excel('byte_frequencies.xlsx', index=False)
