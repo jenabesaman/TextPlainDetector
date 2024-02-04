@@ -1,6 +1,6 @@
 import os
 
-import joblib
+# import joblib
 from flask import Flask, request, jsonify
 from werkzeug.exceptions import BadRequest
 
@@ -70,7 +70,7 @@ def ping():
 #         return "cant predict"
 
 
-@app.route('/textplain', methods=['POST'])
+@app.route('/r', methods=['POST'])
 def get_plain_text():
     try:
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
